@@ -1,0 +1,104 @@
+/* Cherries Diner
+   Design read: high-end redesign of a family diner for downtown Pittsburgh regulars,
+   premium-consumer language with kinetic type and scroll storytelling.
+   Dials: DESIGN_VARIANCE 9, MOTION_INTENSITY 8, VISUAL_DENSITY 3.
+   Shape rule: interactive controls are full pill, cards and photos use rounded-card (28px), inputs use rounded-input (14px).
+   Accent rule: cherry red is the only accent, used identically on every page.
+   z-index scale: nav 40, mobile menu 50, skip link 60. */
+
+@import "tailwindcss";
+
+:root {
+  --page: #f3f2ef;
+  --surface: #fbfbfa;
+  --ink: #1b1818;
+  --muted: #5e5857;
+  --line: rgb(27 24 24 / 0.12);
+  --cherry: #c8231a;
+  --cherry-hover: #a91c14;
+  --cherry-text: #b01e16;
+  --cherry-soft: #f6dfdb;
+  --on-cherry: #fff8f6;
+  --panel: #1f1b1b;
+  --on-panel: #f6f2f1;
+  --glow: rgb(90 20 14 / 0.3);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --page: #121010;
+    --surface: #1b1818;
+    --ink: #f3efee;
+    --muted: #b8b0ae;
+    --line: rgb(255 255 255 / 0.12);
+    --cherry-text: #ff7d71;
+    --cherry-soft: #45201c;
+    --panel: #262121;
+    --glow: rgb(0 0 0 / 0.7);
+  }
+}
+
+@theme inline {
+  --color-page: var(--page);
+  --color-surface: var(--surface);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-cherry: var(--cherry);
+  --color-cherry-hover: var(--cherry-hover);
+  --color-cherry-text: var(--cherry-text);
+  --color-cherry-soft: var(--cherry-soft);
+  --color-on-cherry: var(--on-cherry);
+  --color-panel: var(--panel);
+  --color-on-panel: var(--on-panel);
+
+  --font-sans: var(--font-outfit), system-ui, sans-serif;
+  --font-display: var(--font-bricolage), system-ui, sans-serif;
+
+  --radius-card: 28px;
+  --radius-input: 14px;
+
+  --shadow-lift: 0 40px 80px -40px var(--glow);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@utility wrap {
+  width: 100%;
+  max-width: 1400px;
+  margin-inline: auto;
+  padding-inline: clamp(16px, 4vw, 48px);
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-padding-top: 96px;
+  }
+  body {
+    @apply bg-page text-ink font-sans text-[1.0625rem] leading-relaxed antialiased;
+  }
+  h1,
+  h2,
+  h3 {
+    @apply font-display font-extrabold leading-[1.02] tracking-[-0.035em] text-balance;
+  }
+  ::selection {
+    background: var(--cherry);
+    color: #fff;
+  }
+  :focus-visible {
+    outline: 3px solid var(--cherry);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
